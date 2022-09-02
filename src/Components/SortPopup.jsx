@@ -30,6 +30,7 @@ function SortPopup({tip}){
         <div ref={refElem} className="sort">
         <div className="sort__label">
           <svg
+            className={state ? 'rotated' : ''}
             width="10"
             height="6"
             viewBox="0 0 10 6"
