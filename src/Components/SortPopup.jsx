@@ -5,7 +5,7 @@ function SortPopup({tip}){
     const [state,setState]=useState(false)
     const [indexClass,setIndexClass]=useState(0)
     const refElem=useRef()
-    const nameSort=tip[indexClass]
+    const nameSort=tip[indexClass].name
     
     const togglePopup = () => {
       setState(!state)
@@ -51,7 +51,7 @@ function SortPopup({tip}){
                        tip && tip.map((item,index) =>( 
                        <li className={indexClass === index ? 'active' : ''}
                            onClick={()=>IndexClassActive(index)}
-                           key={`${item}_${index}`}>{item}
+                           key={`${item.type}_${index}`}>{item.name}
                         </li>))}
         </ul>
         </div>

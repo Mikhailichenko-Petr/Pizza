@@ -7,7 +7,11 @@ function Home({data}){
         <div className="container">
           <div className="content__top">
             <Categories tip={['Мясные','Вегетарианская','Гриль','Острые','Закытые']} />
-            <SortPopup tip={['популярности','цене','алфавиту']} />
+            <SortPopup tip={[
+              {name:'популярности', type: 'popular'},
+              {name:'цене', type: 'price'},
+              {name:'алфавиту', type: 'alphabet'}
+              ]} />
           </div>
           <h2 className="content__title">Все пиццы</h2>
           <div className="content__items">
