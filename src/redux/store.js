@@ -1,4 +1,4 @@
-import { combineReducers, createStore } from "redux"
+import { createStore } from "redux"
 import rootReduser from "./redusers"
 
 
