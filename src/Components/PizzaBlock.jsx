@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 
 function PizzaBlock({name,imageUrl,price,types,sizes}) {
-    console.log(name,sizes);
     const availableTypes = ['тонкое','традиционное']
     const availableSize = [26,30,40]
     const [activeType,setActiveType]=useState(types[0])
