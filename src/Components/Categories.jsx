@@ -1,7 +1,7 @@
 import React, { useState } from "react"
 
 
-function Categories ({tip,onClickItem}){
+const Categories = React.memo(function Categories ({categoryName,onClickItem}){
    const [state,setState] = useState(null)
       
    const setIndex=(index)=>{
@@ -9,12 +9,14 @@ function Categories ({tip,onClickItem}){
       setState(index)
    }
 
+   console.log('RERENDER');
+
       return(
              <div className="categories">
                      <ul>
                        <li className={state === null ? 'active' : ''} onClick={()=>setIndex(null)}>Все</li>
                        {
-                       tip && tip.map((item,index) => <li
+                       categoryName && categoryName.map((item,index) => <li
                         className={state === index ? 'active' : ''}
                            onClick={()=>setIndex(index)}
                            key={`${item}_${index}`}>{item}
@@ -23,6 +25,6 @@ function Categories ({tip,onClickItem}){
                      </ul>
              </div>
           )
-}
+})
 
 export default Categories
