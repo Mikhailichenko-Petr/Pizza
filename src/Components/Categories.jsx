@@ -9,8 +9,6 @@ const Categories = React.memo(function Categories ({categoryName,onClickItem}){
       setState(index)
    }
 
-   console.log('RERENDER');
-
       return(
              <div className="categories">
                      <ul>
