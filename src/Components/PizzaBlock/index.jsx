@@ -1,6 +1,7 @@
 import classNames from 'classnames';
 import PropTypes from 'prop-types';
 import React, { useState } from 'react';
+import ContentLoader from 'react-content-loader';
 
 function PizzaBlock({name,imageUrl,price,types,sizes}) {
     const availableTypes = ['тонкое','традиционное']
@@ -16,7 +17,7 @@ function PizzaBlock({name,imageUrl,price,types,sizes}) {
     }
     
   return (
-          <div className="pizza-block">
+        <div className="pizza-block">
         <img
           className="pizza-block__image"
           src={imageUrl}
