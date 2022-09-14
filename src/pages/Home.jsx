@@ -2,26 +2,19 @@ import { useCallback } from "react";
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 import {Categories, SortPopup, PizzaBlock, PizzaLoadingBlock } from "../Components";
-import { setCategory } from "../redux/actions/filters";
+import { setCategory, setSort } from "../redux/actions/filters";
 import { fetchPizzas } from "../redux/actions/pizzas"
 
 
 const categoryName=['Мясные','Вегетарианская','Гриль','Острые','Закытые']
 const sortItems=[
-  {name:'популярности', type: 'popular'},
-  {name:'цене', type: 'price'},
-  {name:'алфавиту', type: 'alphabet'}
+  { name: 'популярности', type: 'popular', order: 'desc' },
+  { name: 'цене', type: 'price', order: 'desc' },
+  { name: 'алфавит', type: 'name', order: 'asc' },
   ];
 function Home(){
   
   const dispatch = useDispatch()
-
-
-
-  useEffect(()=>{
-    dispatch(fetchPizzas())
-  },[])
-
 
   const state = useSelector(({pizzas,filters})=>{
     return{
@@ -31,8 +24,19 @@ function Home(){
     }
   })
 
+  console.log(state,'state');
+
+  useEffect(()=>{
+    dispatch(fetchPizzas(state.filters))
+  },[state.filters])
+
   const onSelectCategory=useCallback((index)=>{
+    console.log(index,'test');
     dispatch(setCategory(index))
+  }, [])
+
+  const onSelectType=useCallback((type)=>{
+    dispatch(setSort(type))
   }, [])
 
     return(
@@ -41,15 +45,17 @@ function Home(){
             <Categories 
               categoryName={categoryName}
               onClickItem={onSelectCategory}
-              
+              activCategory={state.filters.category}
              />
-            <SortPopup tip={sortItems} />
+            <SortPopup activeSortType={state.filters.sortBy.type} type={sortItems} onClickSort={onSelectType} />
           </div>
           <h2 className="content__title">Все пиццы</h2>
           <div className="content__items">
             { state.isLoaded 
               ? state.items.map((obj)=> <PizzaBlock key={obj.id} {...obj} />)
-              : Array(10).fill(<PizzaLoadingBlock />)
+              : Array(12)
+                .fill(0)
+                .map((_,index) => <PizzaLoadingBlock key={index} />)
             }
           </div>
         </div>

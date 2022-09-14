@@ -1,13 +1,13 @@
 import React from "react"
 import { useEffect, useRef, useState } from "react"
+import PropTypes from 'prop-types';
 
-const SortPopup = React.memo(function SortPopup({tip}) {
+const SortPopup = React.memo(function SortPopup({type,activeSortType,onClickSort}) {
 
   const [state,setState]=useState(false)
-  const [indexClass,setIndexClass]=useState(0)
   const refElem=useRef()
-  const nameSort=tip[indexClass].name
-  
+  console.log(type,activeSortType,'PROPS-sortPopup');
+  const nameSort=type.find((obj)=> obj.type === activeSortType).name
   const togglePopup = () => {
     setState(!state)
   }
@@ -19,7 +19,8 @@ const SortPopup = React.memo(function SortPopup({tip}) {
   }
 
   const IndexClassActive = (index) => {
-    setIndexClass(index)
+    console.log(index,'blz');
+    onClickSort(index)
     setState(false)
   }
 
@@ -43,16 +44,16 @@ const SortPopup = React.memo(function SortPopup({tip}) {
           />
         </svg>
         <b>Сортировка по:</b>
-        <span onClick={togglePopup} >{nameSort}</span>
+        <span onClick={togglePopup}>{nameSort}</span>
       </div>
       {state && 
       (<div className="sort__popup">
       <ul>
       {
-                     tip && tip.map((item,index) =>( 
-                     <li className={indexClass === index ? 'active' : ''}
-                         onClick={()=>IndexClassActive(index)}
-                         key={`${item.type}_${index}`}>{item.name}
+                     type && type.map((obj,index) =>( 
+                     <li className={activeSortType === obj.type ? 'active' : ''}
+                         onClick={()=>IndexClassActive(obj)}
+                         key={`${obj.type}_${index}`}>{obj.name}
                       </li>))}
       </ul>
       </div>
@@ -60,5 +61,15 @@ const SortPopup = React.memo(function SortPopup({tip}) {
     </div>
   )
 })
+
+SortPopup.propTypes = {
+  activeSortType: PropTypes.string.isRequired,
+  tip: PropTypes.arrayOf(PropTypes.object).isRequired,
+  onClickSort: PropTypes.func.isRequired
+};
+
+SortPopup.defaultProps = {
+  tip: []
+};
 
 export default SortPopup
