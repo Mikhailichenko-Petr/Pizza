@@ -43,6 +43,12 @@ const cart=(state = initialState, action)=> {
                 totalCount: 0,
             }
         }
+        // case "REMOVE_CART_ITEM":{
+        //     return{
+        //         ...state,
+        //         items:items.filter
+        //     }
+        // }
 
         default:
             return state
