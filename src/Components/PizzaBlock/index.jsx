@@ -11,7 +11,7 @@ function PizzaBlock({id,name,imageUrl,price,types,sizes, onClickAddPizza,addedCo
     const onSelectType = (index) => {
         setActiveType(index)
     }
-    console.log(addedCount);
+    
     const onSelectSize = (index) => {
         setActiveSize(index)
     }
