@@ -1,8 +1,7 @@
-import React, { useState } from "react"
+import React from "react"
 import PropTypes from 'prop-types';
 
 const Categories = React.memo(function Categories ({activCategory,categoryName,onClickItem}){
-
       return(
              <div className="categories">
                      <ul>
@@ -20,7 +19,6 @@ const Categories = React.memo(function Categories ({activCategory,categoryName,o
 })
 
 Categories.propTypes = {
-  //  activCategory: PropTypes.oneOf([PropTypes.number,null]),
    categoryName: PropTypes.arrayOf(PropTypes.string).isRequired,
    onClickItem: PropTypes.func
  };

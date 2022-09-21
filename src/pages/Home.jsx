@@ -1,11 +1,12 @@
 import { useCallback } from "react";
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from "react-redux";
-import {Categories, SortPopup, PizzaBlock, PizzaLoadingBlock } from "../Components";
+
+import { Categories, SortPopup, PizzaBlock, PizzaLoadingBlock } from "../Components";
 import { addPizzaToCart } from "../redux/actions/cart";
 import { setCategory, setSort } from "../redux/actions/filters";
 import { fetchPizzas } from "../redux/actions/pizzas"
-import cart from "../redux/redusers/cart";
+
 
 
 const categoryName=['Мясные','Вегетарианская','Гриль','Острые','Закытые']
@@ -27,14 +28,11 @@ function Home(){
     }
   })
 
-  console.log(state,'state');
-
   useEffect(()=>{
     dispatch(fetchPizzas(state.filters))
   },[state.filters])
 
   const onSelectCategory=useCallback((index)=>{
-    console.log(index,'test');
     dispatch(setCategory(index))
   }, [])
 

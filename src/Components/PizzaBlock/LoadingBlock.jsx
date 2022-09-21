@@ -17,6 +17,5 @@ const LoadingBlock=()=>{
         <rect x="137" y="408" rx="25" ry="25" width="140" height="46" />
       </ContentLoader>
       )
-    
 }
 export default LoadingBlock
