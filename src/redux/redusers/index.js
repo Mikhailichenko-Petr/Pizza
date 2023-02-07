@@ -1,10 +1,10 @@
 import { combineReducers } from "redux"
-import filters from "./filters/filters"
-import pizzas from "./pizza/pizzas"
 import cart from "./cart/cart"
+import filters from "./filters/filters"
+import Pizzas from "./pizza/pizzas"
 
 const rootReduser = combineReducers({
-    pizzas,
+    Pizzas,
     filters,
     cart
 })

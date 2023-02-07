@@ -1,28 +1,51 @@
 import React from "react";
 import { useEffect, useRef, useState } from "react";
 import PropTypes from "prop-types";
+import { SortPayload } from "../redux/redusers/filters/actions";
 
-const SortPopup = React.memo(function SortPopup({type,activeSortType,onClickSort,}) {
+export type Payload={
+  name:string,
+  type:string,
+  order:string
+}
+
+interface SortPopupType{
+  sortItems:Payload[],
+  activeSortType:string,
+  onClickSort:(index:SortPayload)=>void
+}
+
+type MouseEventType = MouseEvent & {
+  path: [any];
+}
+
+const SortPopup:React.FC<SortPopupType> = React.memo(function SortPopup({sortItems,activeSortType,onClickSort}) {
   const [state, setState] = useState(false);
-  const refElem = useRef();
-  const nameSort = type.find((obj) => obj.type === activeSortType).name;
+  const refElem = useRef<HTMLDivElement>(null);
+  //@ts-ignore /////////////////////////////////////////////////////////////////////
+  const nameSort = sortItems.find((obj) => obj.type === activeSortType).name;
+
+  console.log(sortItems,'asdasd');
+  
 
   const togglePopup = () => {
     setState(!state);
   };
 
-  const handleClick = (e) => {
+  const handleClick = (e:MouseEventType) => {
     if (!e.path.includes(refElem.current)) {
       setState(false);
     }
   };
 
-  const IndexClassActive = (index) => {
+  const IndexClassActive = (index:SortPayload) => {
     onClickSort(index);
     setState(false);
   };
 
   useEffect(() => {
+    //@ts-ignore
+    //// научиться типизировать
     document.body.addEventListener("click", handleClick);
   }, []);
 
@@ -48,8 +71,8 @@ const SortPopup = React.memo(function SortPopup({type,activeSortType,onClickSort
       {state && (
         <div className="sort__popup">
           <ul>
-            {type &&
-              type.map((obj, index) => (
+            {sortItems &&
+              sortItems.map((obj, index) => (
                 <li
                   className={activeSortType === obj.type ? "active" : ""}
                   onClick={() => IndexClassActive(obj)}
@@ -65,14 +88,14 @@ const SortPopup = React.memo(function SortPopup({type,activeSortType,onClickSort
   );
 });
 
-SortPopup.propTypes = {
-  activeSortType: PropTypes.string.isRequired,
-  tip: PropTypes.arrayOf(PropTypes.object).isRequired,
-  onClickSort: PropTypes.func.isRequired,
-};
+// SortPopup.propTypes = {
+//   activeSortType: PropTypes.string.isRequired,
+//   tip: PropTypes.arrayOf(PropTypes.object).isRequired,
+//   onClickSort: PropTypes.func.isRequired,
+// };
 
-SortPopup.defaultProps = {
-  tip: [],
-};
+// SortPopup.defaultProps = {
+//   tip: [],
+// };
 
 export default SortPopup;

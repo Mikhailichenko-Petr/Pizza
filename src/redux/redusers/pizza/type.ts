@@ -1,4 +1,4 @@
-import { DataType } from "../../actions/pizzas";
+import { DataType } from "./actions";
 
 export interface PizzasTypes{
     items:DataType[],

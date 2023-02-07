@@ -1,4 +1,4 @@
-import { ActionTypesEnum } from "../type"
+import { ActionTypesEnum } from "../../type"
 
 export interface AddCartType{
     id:number

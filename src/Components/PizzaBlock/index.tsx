@@ -1,11 +1,20 @@
-import PropTypes from "prop-types";
 import React, { useState } from "react";
 
 import Button from "../Button";
 
 import classNames from "classnames";
-
-function PizzaBlock({
+import { AddCartType } from "../../redux/redusers/cart/actions";
+type PizzaBlockType ={
+  id:number
+  name:string,
+  imageUrl:string,
+  price:number,
+  types:number[],
+  sizes:number[],
+  addedCount:number,
+  onClickAddPizza:(obj:AddCartType)=>void
+}
+const PizzaBlock:React.FC<PizzaBlockType>=({
   id,
   name,
   imageUrl,
@@ -14,17 +23,17 @@ function PizzaBlock({
   sizes,
   onClickAddPizza,
   addedCount,
-}) {
+}) => {
   const availableTypes = ["тонкое", "традиционное"];
   const availableSize = [26, 30, 40];
   const [activeType, setActiveType] = useState(types[0]);
   const [activeSize, setActiveSize] = useState(0);
   
-  const onSelectType = (index) => {
+  const onSelectType = (index:number) => {
     setActiveType(index);
   };
 
-  const onSelectSize = (index) => {
+  const onSelectSize = (index:number) => {
     setActiveSize(index);
   };
 
@@ -34,7 +43,7 @@ function PizzaBlock({
       name,
       imageUrl,
       price,
-      size: availableSize[activeSize],
+      sizes: availableSize[activeSize],
       type: availableTypes[activeType],
     };
     onClickAddPizza(obj);
@@ -97,20 +106,4 @@ function PizzaBlock({
   );
 }
 
-PizzaBlock.propTypes = {
-  name: PropTypes.string,
-  imageUrl: PropTypes.string,
-  price: PropTypes.number,
-  types: PropTypes.arrayOf(PropTypes.number),
-  sizes: PropTypes.arrayOf(PropTypes.number),
-  onAddPizza: PropTypes.func,
-  addedCount: PropTypes.number,
-};
-
-PizzaBlock.defaultProps = {
-  name: "---",
-  price: 0,
-  types: [],
-  sizes: [],
-};
 export default PizzaBlock;

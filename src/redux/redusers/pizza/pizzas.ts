@@ -8,8 +8,7 @@ const initialState:PizzasTypes={
     isLoaded: false
 }
 
-const pizzas=(state = initialState, action:ActionsTypes)=> {
-    console.log(action)
+const Pizzas=(state = initialState, action:ActionsTypes)=> {
     switch (action.type) {  
         case ActionTypesEnum.SET_PIZZAS:
             return{
@@ -22,4 +21,4 @@ const pizzas=(state = initialState, action:ActionsTypes)=> {
     }
 }
 
-export default pizzas
+export default Pizzas

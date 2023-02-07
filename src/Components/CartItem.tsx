@@ -1,7 +1,12 @@
 import Button from './Button'
 
-const CartItem =({id,name,type,size,image,totalPrice,totalCount,remove,plusItem,minusItem})=>{
+interface CartItemType{
+  id:number,name:string,type:string,size:number,totalPrice:number,totalCount:number,remove:(id:number)=>void,plusItem:(id:number)=>void,minusItem:(id:number)=>void
+}
 
+const CartItem:React.FC<CartItemType> =({id,name,type,size,totalPrice,totalCount,remove,plusItem,minusItem})=>{
+  console.log(id,name,type,size,totalPrice,totalCount,remove,plusItem,minusItem);
+  
     const handleRemoveClick=()=>{
       remove(id)
     }

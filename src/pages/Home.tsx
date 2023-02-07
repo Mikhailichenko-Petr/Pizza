@@ -1,13 +1,21 @@
-import { useCallback } from "react";
+import { ReactElement, useCallback } from "react";
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from "react-redux";
 
 import { Categories, SortPopup, PizzaBlock, PizzaLoadingBlock } from "../Components";
-import { addPizzaToCart } from "../redux/actions/cart";
-import { setCategory, setSort } from "../redux/actions/filters";
-import { fetchPizzas } from "../redux/actions/pizzas"
+import { AddCartType, addPizzaToCart } from "../redux/redusers/cart/actions";
+import { selectCart } from "../redux/redusers/cart/selectors";
+import { setCategory, setSort } from "../redux/redusers/filters/actions";
+import { selectFilters } from "../redux/redusers/filters/selectors";
+import { DataType, fetchPizzas } from "../redux/redusers/pizza/actions"
+import { selectPizza } from "../redux/redusers/pizza/selectors";
+import { DispatchUp } from "../redux/store";
 
-
+export type SortType={
+  name:string,
+  order:string,
+  type:string
+}
 
 const categoryName=['Мясные','Вегетарианская','Гриль','Острые','Закытые']
 const sortItems=[
@@ -15,34 +23,28 @@ const sortItems=[
   { name: 'цене', type: 'price', order: 'desc' },
   { name: 'алфавит', type: 'name', order: 'asc' },
   ];
-function Home(){
+const Home:React.FC=()=>{
   
-  const dispatch = useDispatch()
+  const dispatch = DispatchUp()
+  const {items,isLoaded} = useSelector(selectPizza)
+  const filters = useSelector(selectFilters)
+  const cart = useSelector(selectCart)
 
-  const state = useSelector(({pizzas,filters,cart})=>{
-    return{
-      items: pizzas.items,
-      isLoaded: pizzas.isLoaded,
-      filters: filters,
-      cart: cart
-    }
-  })
 
   useEffect(()=>{
-    dispatch(fetchPizzas(state.filters))
-  },[state.filters])
+    //@ts-ignore
+    dispatch(fetchPizzas(filters))
+  },[filters])
 
-  const onSelectCategory=useCallback((index)=>{
+  const onSelectCategory=useCallback((index:number|null)=>{
     dispatch(setCategory(index))
-    console.log(index,'category');
   }, [])
 
-  const onSelectType=useCallback((type)=>{
+  const onSelectType=useCallback((type:SortType)=>{
     dispatch(setSort(type))
-    console.log(type,'sort');
   }, [])
 
-  const addPizza = (obj) => {
+  const addPizza = (obj:AddCartType) => {
     dispatch(addPizzaToCart(obj))
   }
 
@@ -52,20 +54,20 @@ function Home(){
             <Categories 
               categoryName={categoryName}
               onClickItem={onSelectCategory}
-              activCategory={state.filters.category}
+              activCategory={filters.category}
              />
             <SortPopup 
-              activeSortType={state.filters.sortBy.type} 
-              type={sortItems} 
+              activeSortType={filters.sortBy.type} 
+              sortItems={sortItems} 
               onClickSort={onSelectType} 
             />
           </div>
           <h2 className="content__title">Все пиццы</h2>
           <div className="content__items">
-            { state.isLoaded 
-              ? state.items.map((obj)=> <PizzaBlock 
+            { isLoaded 
+              ? items.map((obj:DataType)=> <PizzaBlock 
                                             key={obj.id}
-                                            addedCount={state.cart.items[obj.id] && state.cart.items[obj.id].items.length} 
+                                            addedCount={cart.items[obj.id] && cart.items[obj.id].items.length} 
                                             {...obj} 
                                             onClickAddPizza={addPizza} 
                                           />)

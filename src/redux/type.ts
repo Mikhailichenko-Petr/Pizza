@@ -1,6 +1,6 @@
-import { AddPizzaCartType, ClearCartType, MinusCartType, PlusCartType, RemoveCartType } from "./actions/cart";
-import { SetCategoryType, SetSortType } from "./actions/filters";
-import { SetLoadedType, SetPizzaType } from "./actions/pizzas";
+import { AddPizzaCartType, ClearCartType, MinusCartType, PlusCartType, RemoveCartType } from "./redusers/cart/actions";
+import { SetCategoryType, SetSortType } from "./redusers/filters/actions";
+import { SetLoadedType, SetPizzaType } from "./redusers/pizza/actions";
 
 export type ActionsTypes = SetLoadedType|SetSortType|SetCategoryType|SetPizzaType|AddPizzaCartType|ClearCartType|RemoveCartType|PlusCartType|MinusCartType
 

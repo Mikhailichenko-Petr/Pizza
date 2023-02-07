@@ -1,7 +1,7 @@
 import axios from "axios"
 import React from "react"
-import { FiltersReduserType } from "../redusers/filters/type"
-import { ActionTypesEnum } from "../type"
+import { FiltersReduserType } from "../filters/type"
+import { ActionTypesEnum } from "../../type"
 
 export type SetLoadedType={
     type: ActionTypesEnum.SET_LOADED
@@ -28,7 +28,7 @@ export const setLoaded=(items:boolean):SetLoadedType=>({
     type: ActionTypesEnum.SET_LOADED,
     payload: items,
 })
-//@ts-ignore
+// @ts-ignore
 export const fetchPizzas:React.FC<FiltersReduserType>=({category,sortBy})=>(dispatch)=>{
     dispatch(setLoaded(false))
     axios.get(`http://localhost:3001/pizzas?${category !== null ? `category=${category}` : ''}&_sort=${sortBy.type}&_order=${sortBy.order}`)

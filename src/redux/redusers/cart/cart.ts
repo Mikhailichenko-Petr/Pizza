@@ -1,19 +1,16 @@
-import { AddCartType } from "../../actions/cart";
+import { AddCartType } from "./actions";
 import { ActionsTypes } from "../../type";
+import { ItemsCart } from "./type";
 
-type GetTotoalSumType={
-  items:AddCartType,
-  totalPrice:number
-}
 
 export interface CartType{
-  items:AddCartType,
+  items:ItemsCart[],
   totalPrice:number,
   totalCount:number
 }
 
 const initialState:CartType={
-    items: {},
+    items: [],
     totalPrice: 0, /// общая сумма 
     totalCount: 0, /// количество пиц
 }
@@ -21,10 +18,11 @@ const initialState:CartType={
 const getTotalPrice =(arr:AddCartType[])=> 
  arr.reduce((sum:number,arr) => arr.price + sum,0)
 
-const _get = (obj:GetTotoalSumType, path:string) => {
+const _get = (obj:ItemsCart[], path:string) => {
     const [firstKey, ...keys] = path.split('.');
     return keys.reduce((val, key) => {
       return val[key];
+      //@ts-ignore
     }, obj[firstKey]);
   };
 
@@ -44,7 +42,7 @@ const cart=(state = initialState, action:ActionsTypes)=> {
                      ?[action.payload]
                      :[...state.items[action.payload.id].items, action.payload] 
             
-            const newItems={
+            const newItems:any={
                 ...state.items,
                     [action.payload.id]: {
                         items: currentPizzaItems,
@@ -88,7 +86,7 @@ const cart=(state = initialState, action:ActionsTypes)=> {
               ...state.items[action.payload].items,
               state.items[action.payload].items[0],
             ];
-            const newItems = {
+            const newItems:any = {
               ...state.items,
               [action.payload]: {
                 items: newObjItems,
@@ -111,7 +109,7 @@ const cart=(state = initialState, action:ActionsTypes)=> {
             const oldItems = state.items[action.payload].items;
             const newObjItems =
               oldItems.length > 1 ? state.items[action.payload].items.slice(1) : oldItems;
-            const newItems = {
+            const newItems:any = {
               ...state.items,
               [action.payload]: {
                 items: newObjItems,
