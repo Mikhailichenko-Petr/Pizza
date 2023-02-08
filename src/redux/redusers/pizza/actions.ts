@@ -2,32 +2,14 @@ import axios from "axios"
 import React from "react"
 import { FiltersReduserType } from "../filters/type"
 import { ActionTypesEnum } from "../../type"
+import { DataType, SetLoadedType, SetPizzaType } from "./type"
 
-export type SetLoadedType={
-    type: ActionTypesEnum.SET_LOADED
-    payload: boolean
-}
-
-export type SetPizzaType={
-    type: ActionTypesEnum.SET_PIZZAS
-    payload: DataType
-}
-
-export interface DataType{
-    category:number,
-    id:number
-    imageUrl:string
-    name:string
-    price:number
-    rating:number
-    sizes:number[]
-    types:number[]
-}
 
 export const setLoaded=(items:boolean):SetLoadedType=>({
     type: ActionTypesEnum.SET_LOADED,
     payload: items,
 })
+
 // @ts-ignore
 export const fetchPizzas:React.FC<FiltersReduserType>=({category,sortBy})=>(dispatch)=>{
     dispatch(setLoaded(false))

@@ -5,7 +5,6 @@ interface CartItemType{
 }
 
 const CartItem:React.FC<CartItemType> =({id,name,type,size,totalPrice,totalCount,remove,plusItem,minusItem})=>{
-  console.log(id,name,type,size,totalPrice,totalCount,remove,plusItem,minusItem);
   
     const handleRemoveClick=()=>{
       remove(id)

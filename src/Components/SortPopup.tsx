@@ -1,7 +1,6 @@
 import React from "react";
 import { useEffect, useRef, useState } from "react";
-import PropTypes from "prop-types";
-import { SortPayload } from "../redux/redusers/filters/actions";
+import { SortPayload } from "../redux/redusers/filters/type";
 
 export type Payload={
   name:string,

@@ -1,5 +1,18 @@
-import { AddCartType } from "./actions"
+import { ActionTypesEnum } from "../../type"
 
+export interface AddCartType{
+  id:number
+  imageUrl:string
+  name:string
+  price:number
+  sizes:number
+  type:string
+}
+
+export type AddPizzaCartType={
+  type: ActionTypesEnum.ADD_PIZZA_CART
+  payload: AddCartType
+}
 
 export type ItemsCart={
     items:AddCartType[],

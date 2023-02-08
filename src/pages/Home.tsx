@@ -1,14 +1,16 @@
-import { ReactElement, useCallback } from "react";
+import {  useCallback } from "react";
 import { useEffect } from 'react';
-import { useDispatch, useSelector } from "react-redux";
+import {  useSelector } from "react-redux";
 
 import { Categories, SortPopup, PizzaBlock, PizzaLoadingBlock } from "../Components";
-import { AddCartType, addPizzaToCart } from "../redux/redusers/cart/actions";
+import {  addPizzaToCart } from "../redux/redusers/cart/actions";
 import { selectCart } from "../redux/redusers/cart/selectors";
+import { AddCartType } from "../redux/redusers/cart/type";
 import { setCategory, setSort } from "../redux/redusers/filters/actions";
 import { selectFilters } from "../redux/redusers/filters/selectors";
-import { DataType, fetchPizzas } from "../redux/redusers/pizza/actions"
+import { fetchPizzas } from "../redux/redusers/pizza/actions"
 import { selectPizza } from "../redux/redusers/pizza/selectors";
+import { DataType } from "../redux/redusers/pizza/type";
 import { DispatchUp } from "../redux/store";
 
 export type SortType={

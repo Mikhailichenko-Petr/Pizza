@@ -6,7 +6,6 @@ import CartItem from "../Components/CartItem";
 import { clearCart, minusCartItem, plusCartItem, removeCartItem } from "../redux/redusers/cart/actions";
 import { selectCart } from "../redux/redusers/cart/selectors";
 
-//@ts-ignore     ////////////////////////////////////////////////////
 import emptyCart from "../scss/assets/img/emptyCart.png";
 
 const Cart:React.FC=()=> {

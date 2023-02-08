@@ -1,6 +1,5 @@
-import { AddCartType } from "./actions";
 import { ActionsTypes } from "../../type";
-import { ItemsCart } from "./type";
+import { AddCartType, ItemsCart } from "./type";
 
 
 export interface CartType{

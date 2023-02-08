@@ -1,18 +1,7 @@
 import { ActionTypesEnum } from "../../type"
+import { AddCartType, AddPizzaCartType } from "./type"
 
-export interface AddCartType{
-    id:number
-    imageUrl:string
-    name:string
-    price:number
-    sizes:number
-    type:string
-}
 
-export type AddPizzaCartType={
-    type: ActionTypesEnum.ADD_PIZZA_CART
-    payload: AddCartType
-}
 export const addPizzaToCart = (obj:AddCartType):AddPizzaCartType =>({
     type: ActionTypesEnum.ADD_PIZZA_CART,
     payload: obj
@@ -51,3 +40,4 @@ export const minusCartItem = (id:number) =>({
     type: ActionTypesEnum.MINUS_CART_ITEM,
     payload: id
 })
+

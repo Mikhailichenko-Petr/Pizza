@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import Button from "./Button";
-//@ts-ignore  ///////////////////////////////
+
 import logoSvg from "../scss/assets/img/pizza-logo.svg";
 import { useSelector } from "react-redux";
 import { selectCart } from "../redux/redusers/cart/selectors";
