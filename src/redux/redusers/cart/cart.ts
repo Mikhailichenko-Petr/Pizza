@@ -1,12 +1,8 @@
 import { ActionsTypes } from "../../type";
-import { AddCartType, ItemsCart } from "./type";
+import { AddCartType, CartType, ItemsCart } from "./type";
 
 
-export interface CartType{
-  items:ItemsCart[],
-  totalPrice:number,
-  totalCount:number
-}
+
 
 const initialState:CartType={
     items: [],
@@ -33,7 +29,6 @@ const getTotalSum = (obj:AddCartType, path:string) => {
   };
 
 const cart=(state = initialState, action:ActionsTypes)=> { 
-  console.log(action,'cart')
     switch (action.type) {
         case "ADD_PIZZA_CART":{
 

@@ -5,8 +5,8 @@ import { selectCart } from "../redux/redusers/cart/selectors";
 import Button from "./Button";
 
 
-const ButtonCart:React.FC =()=>{
-
+const ButtonCart:React.FC =React.memo(()=>{
+  console.log('bytton')
   const {totalPrice,totalCount} = useSelector(selectCart)
 
     return(
@@ -49,6 +49,6 @@ const ButtonCart:React.FC =()=>{
       </Link>
 </div>
     )
-}
+})
 
 export default ButtonCart

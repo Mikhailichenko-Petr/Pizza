@@ -143,8 +143,8 @@ const Cart:React.FC=()=> {
                 </span>
               </div>
               <div className="cart__bottom-buttons">
-                <a
-                  href="/"
+              <Link to="/">
+                <div
                   className="button button--outline button--add go-back-btn"
                 >
                   <svg
@@ -162,10 +162,11 @@ const Cart:React.FC=()=> {
                       strokeLinejoin="round"
                     />
                   </svg>
-                  <Link to="/">
-                    <span>Вернуться назад</span>
-                  </Link>
-                </a>
+                  
+                    <span >Вернуться назад</span>
+                  
+                </div>
+                </Link>
                 <div className="button pay-btn">
                   <span>Оплатить сейчас</span>
                 </div>

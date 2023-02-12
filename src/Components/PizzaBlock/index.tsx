@@ -4,6 +4,7 @@ import Button from "../Button";
 
 import classNames from "classnames";
 import { AddCartType } from "../../redux/redusers/cart/type";
+
 type PizzaBlockType ={
   id:number
   name:string,

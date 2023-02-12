@@ -9,6 +9,12 @@ export interface AddCartType{
   type:string
 }
 
+export interface CartType{
+  items:ItemsCart[],
+  totalPrice:number,
+  totalCount:number
+}
+
 export type AddPizzaCartType={
   type: ActionTypesEnum.ADD_PIZZA_CART
   payload: AddCartType
