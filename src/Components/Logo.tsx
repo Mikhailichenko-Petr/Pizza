@@ -3,8 +3,6 @@ import logoSvg from "../scss/assets/img/pizza-logo.svg";
 
 const Logo:React.FC =()=>{
 
-  console.log('gig')
-
       return(
         <div className="header__logo">
         <img width="38" src={logoSvg} alt="Pizza logo" />

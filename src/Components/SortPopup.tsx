@@ -1,4 +1,4 @@
-import React from "react";
+import React, { RefObject } from "react";
 import { useEffect, useRef, useState } from "react";
 import { SortPayload } from "../redux/redusers/filters/type";
 
@@ -7,7 +7,9 @@ export type Payload={
   type:string,
   order:string
 }
-
+ type find={
+  find:any
+ }
 interface SortPopupType{
   sortItems:Payload[],
   activeSortType:string,
@@ -15,27 +17,25 @@ interface SortPopupType{
 }
 
 type MouseEventType = MouseEvent & {
-  path: [any];
+  path: Node[];
 }
 
-const SortPopup:React.FC<SortPopupType> = React.memo(function SortPopup({sortItems,activeSortType,onClickSort}) {
-  const [state, setState] = useState(false);
-  const refElem = useRef<HTMLDivElement>(null);
-  //@ts-ignore /////////////////////////////////////////////////////////////////////
-  const nameSort = sortItems.find((obj) => obj.type === activeSortType).name;
 
-  console.log(sortItems,'asdasd');
-  
+const SortPopup:React.FC<SortPopupType> = React.memo(function SortPopup({sortItems,activeSortType,onClickSort}) {
+  const sortItemFind = sortItems as find
+  const [state, setState] = useState(false);
+  const refElem = useRef<HTMLDivElement>(null) ;
+  console.log(sortItems,'www');
+  const nameSort = sortItemFind.find((obj:Payload) => obj.type === activeSortType).name;
+  console.log(nameSort,'nameSort');
 
   const togglePopup = () => {
     setState(!state);
   };
 
-  const handleClick = (e:MouseEventType) => {
-    if (!e.path.includes(refElem.current)) {
-      setState(false);
-    }
-  };
+
+
+  
 
   const IndexClassActive = (index:SortPayload) => {
     onClickSort(index);
@@ -43,14 +43,23 @@ const SortPopup:React.FC<SortPopupType> = React.memo(function SortPopup({sortIte
   };
 
   useEffect(() => {
-    //@ts-ignore
-    //// научиться типизировать
+      const handleClick = (e:MouseEvent) => {
+        console.log('mont')
+     const _event = e as MouseEventType
+      if (refElem.current && !_event.composedPath().includes(refElem.current)) {
+        setState(false);
+      }
+  };
     document.body.addEventListener("click", handleClick);
+    return () => {
+      console.log('unmount')
+      document.body.removeEventListener('click', handleClick);
+    };
   }, []);
 
   return (
     <div ref={refElem} className="sort">
-      <div className="sort__label">
+      <div onClick={togglePopup} className="sort__label">
         <svg
           className={state ? "rotated" : ""}
           width="10"
@@ -65,7 +74,7 @@ const SortPopup:React.FC<SortPopupType> = React.memo(function SortPopup({sortIte
           />
         </svg>
         <b>Сортировка по:</b>
-        <span onClick={togglePopup}>{nameSort}</span>
+        <span >{nameSort}</span>
       </div>
       {state && (
         <div className="sort__popup">

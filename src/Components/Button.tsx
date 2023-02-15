@@ -9,9 +9,7 @@ type buttonType={
     children:any
 }
 
-const Button:React.FC<buttonType> = ({onClick,className,outline,children})=>{
-    console.log(children,'children button');
-    
+const Button:React.FC<buttonType> = ({onClick,className,outline,children})=>{   
     return <button onClick={onClick} className={classNames('button',className,{
         'button--outline' : outline
     })}>{children}</button>

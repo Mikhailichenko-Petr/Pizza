@@ -3,8 +3,8 @@ import { compose, createStore, applyMiddleware } from "redux"
 import thunk from "redux-thunk"
 import rootReduser from "./redusers"
 
-
-const composeEnhancers = compose
+//@ts-ignore
+const composeEnhancers =  window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose
 
 const store = createStore(rootReduser,composeEnhancers(applyMiddleware(thunk)))
 

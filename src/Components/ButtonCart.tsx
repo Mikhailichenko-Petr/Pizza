@@ -6,7 +6,6 @@ import Button from "./Button";
 
 
 const ButtonCart:React.FC =React.memo(()=>{
-  console.log('bytton')
   const {totalPrice,totalCount} = useSelector(selectCart)
 
     return(

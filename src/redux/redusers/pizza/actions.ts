@@ -13,11 +13,16 @@ export const setLoaded=(items:boolean):SetLoadedType=>({
 
 // @ts-ignore
 export const fetchPizzas:React.FC<FiltersReduserType>=({category,sortBy})=>(dispatch)=>{
-    // dispatch(setLoaded(false))
+    dispatch(setLoaded(false))
     axios.get(`http://localhost:3001/pizzas?${category !== null ? `category=${category}` : ''}&_sort=${sortBy.type}&_order=${sortBy.order}`)
     .then(({data})=>{dispatch(setPizzas(data))})
     
 }
+
+export const setPizzas=(items:DataType):SetPizzaType=>({
+    type: ActionTypesEnum.SET_PIZZAS,
+    payload: items
+})
 
 // export const fetchJewelry = createAsyncThunk<JewelryType[],FethDataType>(
 //     'jewelry/fetchJeweleryStatus',
@@ -51,7 +56,3 @@ export const fetchPizzas:React.FC<FiltersReduserType>=({category,sortBy})=>(disp
 
 
 
-export const setPizzas=(items:DataType):SetPizzaType=>({
-    type: ActionTypesEnum.SET_PIZZAS,
-    payload: items
-})
