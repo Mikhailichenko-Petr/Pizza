@@ -5,6 +5,7 @@ import { FiltersReduserType } from "./type"
 const initialState:FiltersReduserType={
     category: null,
     sortBy: {
+        name:'популярности',
         type: 'popular',
         order: 'desc'
     }

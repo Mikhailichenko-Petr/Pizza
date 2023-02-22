@@ -23,14 +23,6 @@ const Categories:React.FC<CategoriesPropTypes> = React.memo(function Categories 
           )
 })
 
-// Categories.propTypes = {
-//    categoryName: PropTypes.arrayOf(PropTypes.string).isRequired,
-//    onClickItem: PropTypes.func
-//  };
- 
-//  Categories.defaultProps = {
-//    activCategory: null,
-//    categoryName: [],
-//  };
+
 
 export default Categories

@@ -19,6 +19,7 @@ export type SetCategoryType={
 export type SortBy={
     type:string,
     order:string
+    name:string
 }
 
 export type FiltersReduserType={

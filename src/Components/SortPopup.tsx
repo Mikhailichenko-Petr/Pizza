@@ -1,17 +1,24 @@
-import React, { RefObject } from "react";
+import React from "react";
 import { useEffect, useRef, useState } from "react";
+import { useSelector } from "react-redux";
+import { selectFilters } from "../redux/redusers/filters/selectors";
 import { SortPayload } from "../redux/redusers/filters/type";
 
+export enum SortPropertyEnum {
+  POPULAR = 'popular',
+  NAME = 'name',
+  PRICE = 'price',
+}
+
 export type Payload={
+  find?:any
+  map?:any
   name:string,
-  type:string,
+  type:SortPropertyEnum ,
   order:string
 }
- type find={
-  find:any
- }
+
 interface SortPopupType{
-  sortItems:Payload[],
   activeSortType:string,
   onClickSort:(index:SortPayload)=>void
 }
@@ -20,31 +27,32 @@ type MouseEventType = MouseEvent & {
   path: Node[];
 }
 
+const sortItems:Payload[]=[
+  { name: 'популярности', type:SortPropertyEnum.POPULAR, order: 'desc' },
+  { name: 'цене', type:SortPropertyEnum.PRICE, order: 'desc' },
+  { name: 'алфавиту', type:SortPropertyEnum.NAME, order: 'asc' },
+  ];
 
-const SortPopup:React.FC<SortPopupType> = React.memo(function SortPopup({sortItems,activeSortType,onClickSort}) {
-  const sortItemFind = sortItems as find
+const SortPopup:React.FC<SortPopupType> = React.memo(function SortPopup({activeSortType,onClickSort}) {
+
   const [state, setState] = useState(false);
-  const refElem = useRef<HTMLDivElement>(null) ;
-  console.log(sortItems,'www');
-  const nameSort = sortItemFind.find((obj:Payload) => obj.type === activeSortType).name;
-  console.log(nameSort,'nameSort');
+  const {sortBy}=useSelector(selectFilters)
+  const refElem = useRef<HTMLDivElement>(null);
 
   const togglePopup = () => {
     setState(!state);
   };
 
 
-
-  
-
-  const IndexClassActive = (index:SortPayload) => {
-    onClickSort(index);
+  const IndexClassActive = (obj:SortPayload) => {
+    console.log(obj,'ssss');
+    
+    onClickSort(obj);
     setState(false);
   };
 
   useEffect(() => {
       const handleClick = (e:MouseEvent) => {
-        console.log('mont')
      const _event = e as MouseEventType
       if (refElem.current && !_event.composedPath().includes(refElem.current)) {
         setState(false);
@@ -52,7 +60,6 @@ const SortPopup:React.FC<SortPopupType> = React.memo(function SortPopup({sortIte
   };
     document.body.addEventListener("click", handleClick);
     return () => {
-      console.log('unmount')
       document.body.removeEventListener('click', handleClick);
     };
   }, []);
@@ -74,7 +81,7 @@ const SortPopup:React.FC<SortPopupType> = React.memo(function SortPopup({sortIte
           />
         </svg>
         <b>Сортировка по:</b>
-        <span >{nameSort}</span>
+        <span >{sortBy.name}</span>
       </div>
       {state && (
         <div className="sort__popup">
@@ -96,14 +103,5 @@ const SortPopup:React.FC<SortPopupType> = React.memo(function SortPopup({sortIte
   );
 });
 
-// SortPopup.propTypes = {
-//   activeSortType: PropTypes.string.isRequired,
-//   tip: PropTypes.arrayOf(PropTypes.object).isRequired,
-//   onClickSort: PropTypes.func.isRequired,
-// };
-
-// SortPopup.defaultProps = {
-//   tip: [],
-// };
 
 export default SortPopup;

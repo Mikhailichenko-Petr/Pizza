@@ -20,11 +20,7 @@ export type SortType={
 }
 
 const categoryName=['Мясные','Вегетарианская','Гриль','Острые','Закытые']
-const sortItems=[
-  { name: 'популярности', type: 'popular', order: 'desc' },
-  { name: 'цене', type: 'price', order: 'desc' },
-  { name: 'алфавит', type: 'name', order: 'asc' },
-  ];
+
 const Home:React.FC=()=>{
   
   const dispatch = DispatchUp()
@@ -60,7 +56,6 @@ const Home:React.FC=()=>{
              />
             <SortPopup 
               activeSortType={filters.sortBy.type} 
-              sortItems={sortItems} 
               onClickSort={onSelectType} 
             />
           </div>
