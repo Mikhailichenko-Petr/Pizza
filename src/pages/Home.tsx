@@ -30,7 +30,7 @@ const Home:React.FC=()=>{
 
 
   useEffect(()=>{
-    //@ts-ignore
+    //@ts-ignore  ПОФИКСИТЬ
     dispatch(fetchPizzas(filters))
   },[filters])
 
