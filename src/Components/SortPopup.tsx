@@ -45,8 +45,6 @@ const SortPopup:React.FC<SortPopupType> = React.memo(function SortPopup({activeS
 
 
   const IndexClassActive = (obj:SortPayload) => {
-    console.log(obj,'ssss');
-    
     onClickSort(obj);
     setState(false);
   };
